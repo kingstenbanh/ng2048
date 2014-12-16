@@ -29,8 +29,7 @@ $tile-gold-glow-color: lighten($tile-gold-color, 15%);
 $text-color: #776E65;
 $bright-text-color: #f9f6f2;
 
-// DON'T EDIT BELOW
-$transition-time: 50ms;
+$transition-time: 20ms;
 
 .container {
   max-width: 600px;
