@@ -5,19 +5,19 @@ angular
 .config(function(GridServiceProvider) {
   GridServiceProvider.setSize(4);
 })
-.controller('GameController', function(GameManager, KeyboardService) {
+.controller('GameController', function(GameManager, keyboardService) {
 
   this.game = GameManager;
 
   this.newGame = function() {
-    KeyboardService.init();
+    keyboardService.init();
     this.game.newGame();
     this.startGame();
   };
 
   this.startGame = function() {
     var self = this;
-    KeyboardService.on(function(key) {
+    keyboardService.on(function(key) {
       self.game.move(key);
     });
   };

@@ -1,7 +1,12 @@
 'use strict';
 
-angular.module('Grid', [])
-.factory('GenerateUniqueId', function() {
+angular
+  .module('Grid', [])
+  .factory('GenerateUniqueId', GenerateUniqueId)
+  .factory('TileModel', TileModel)
+  .provider('GridService', GridService);
+
+function GenerateUniqueId() {
   var generateUid = function() {
     // http://www.ietf.org/rfc/rfc4122.txt
     // http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
@@ -16,8 +21,11 @@ angular.module('Grid', [])
   return {
     next: function() { return generateUid(); }
   };
-})
-.factory('TileModel', function(GenerateUniqueId) {
+}
+
+TileModel.$inject = ['GenerateUniqueId'];
+
+function TileModel(GenerateUniqueId) {
   var Tile = function(pos, val) {
     this.x      = pos.x;
     this.y      = pos.y;
@@ -61,8 +69,9 @@ angular.module('Grid', [])
   };
 
   return Tile;
-})
-.provider('GridService', function() {
+}
+
+function GridService() {
   this.size = 4; // Default size
   this.startingTileNumber = 2; // default starting tiles
 
@@ -91,7 +100,7 @@ angular.module('Grid', [])
     this.getSize = function() {
       return service.size;
     };
-    
+
     // Build game board
     this.buildEmptyGameBoard = function() {
       var self = this;
@@ -246,7 +255,7 @@ angular.module('Grid', [])
 
       this.setCellAt(oldPos, null);
       this.setCellAt(newPosition, tile);
-       
+
       tile.updatePosition(newPosition);
     };
 
@@ -354,4 +363,4 @@ angular.module('Grid', [])
 
     return this;
   };
-});
+}

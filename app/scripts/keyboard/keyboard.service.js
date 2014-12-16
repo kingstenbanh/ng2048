@@ -1,8 +1,10 @@
 'use strict';
 
-angular.module('Keyboard', [])
-.service('KeyboardService', function($document) {
+angular
+  .module('Keyboard', [])
+  .service('keyboardService', keyboardService);
 
+function keyboardService($document) {
   var UP    = 'up',
       RIGHT = 'right',
       DOWN  = 'down',
@@ -15,7 +17,7 @@ angular.module('Keyboard', [])
     40: DOWN
   };
 
-  this.init = function() {
+  function init() {
     var self = this;
     this.keyEventHandlers = [];
     $document.bind('keydown', function(evt) {
@@ -27,13 +29,13 @@ angular.module('Keyboard', [])
         self._handleKeyEvent(key, evt);
       }
     });
-  };
+  }
 
-  this.on = function(cb) {
+  function on(cb) {
     this.keyEventHandlers.push(cb);
-  };
+  }
 
-  this._handleKeyEvent = function(key, evt) {
+  function _handleKeyEvent(key, evt) {
     var callbacks = this.keyEventHandlers;
     if (!callbacks) {
       return;
@@ -47,6 +49,14 @@ angular.module('Keyboard', [])
         cb(key, evt);
       }
     }
+  }
+
+  var service = {
+    init: init,
+    on: on,
+    _handleKeyEvent: _handleKeyEvent
   };
 
-});
+  return service;
+
+}
