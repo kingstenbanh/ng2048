@@ -40,7 +40,6 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "preinstall": "grunt serve",
-    "start": "node server.js"
+    "start": "grunt serve && node server.js"
   }
 }
