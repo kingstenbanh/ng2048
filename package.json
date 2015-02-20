@@ -40,6 +40,6 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "grunt serve && node server.js"
+    "start": "npm i && bower i && grunt serve && node server.js"
   }
 }
